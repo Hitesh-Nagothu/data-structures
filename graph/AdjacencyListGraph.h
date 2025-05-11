@@ -10,7 +10,8 @@ using namespace std;
 
 struct Node {
     int id;
-    Node(int id) : id(id){}
+    bool isRoot;
+    Node(int id, bool isRoot): id(id), isRoot(isRoot){}
 };
 
 class AdjacencyListGraph : public IGraph {
@@ -20,9 +21,12 @@ class AdjacencyListGraph : public IGraph {
         unordered_map<int, vector<pair<int, int>>> connections;
 
     public:
-        void addNode(int id) override;
+        void addNode(int id, bool isRoot) override;
         void addEdge(int from, int to, int weight) override;
         void printGraph() const override;
+
+        unordered_map<int, vector<int>> depthFirstTraversal() override;
+       // unordered_map<int, vector<int>> breadthFirstTravelsal() override;
 };
 
 
