@@ -20,7 +20,7 @@ class AdjacencyListGraph : public IGraph {
     private:
         unordered_map<int, Node> nodes;
         unordered_map<int, vector<pair<int, int>>> connections;
-        GraphType graphType;
+        const GraphType graphType;
 
     public:
 
