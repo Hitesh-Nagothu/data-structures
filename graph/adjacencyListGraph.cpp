@@ -8,12 +8,26 @@
 using namespace std;
 
 void AdjacencyListGraph::addNode(int id, bool isRoot=false){
+
+    auto existing_node = nodes.find(id);
+    if(existing_node != nodes.end() && existing_node->second.isRoot != isRoot){
+        throw logic_error("Node " + to_string(id) + " already exists with different root status");
+    }
+
     nodes[id] = Node(id, isRoot);
 }
 
 void AdjacencyListGraph::addEdge(int from, int to, int weight=1){
 
-    if(nodes[to].isRoot){
+    if(nodes.find(from) == nodes.end()){
+        throw logic_error("Node " + to_string(from) + " does not exist");
+    }
+
+    if(nodes.find(to) == nodes.end()){
+        throw logic_error("Node " + to_string(to) + " does not exist");
+    }
+
+    if(nodes[to].isRoot || (graphType == GraphType::DIRECTED && nodes[from].isRoot)){
         throw logic_error("Cannot add an incoming edge to root");
     }
 
