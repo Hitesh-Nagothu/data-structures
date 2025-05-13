@@ -14,21 +14,30 @@ void AdjacencyListGraph::addNode(int id, bool isRoot=false){
         throw logic_error("Node " + to_string(id) + " already exists with different root status");
     }
 
-    nodes[id] = Node(id, isRoot);
+    nodes.insert({id, Node(id, isRoot)});
 }
 
 void AdjacencyListGraph::addEdge(int from, int to, int weight=1){
 
-    if(nodes.find(from) == nodes.end()){
+    auto from_node = nodes.find(from);
+    auto to_node = nodes.find(to);
+
+    if(from_node == nodes.end()){
         throw logic_error("Node " + to_string(from) + " does not exist");
     }
 
-    if(nodes.find(to) == nodes.end()){
+    if(to_node == nodes.end()){
         throw logic_error("Node " + to_string(to) + " does not exist");
     }
 
-    if(nodes[to].isRoot || (graphType == GraphType::DIRECTED && nodes[from].isRoot)){
+    if(to_node->second.isRoot || (graphType == GraphType::UNDIRECTED && from_node->second.isRoot)){
         throw logic_error("Cannot add an incoming edge to root");
+    }
+
+    if(graphType == GraphType::UNDIRECTED){
+        // add the reverse edge
+        auto reverse_connection = make_pair(from, weight);
+        connections[to].emplace_back(reverse_connection);
     }
 
     pair<int, int> connection(to, weight);

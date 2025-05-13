@@ -12,7 +12,8 @@ using namespace std;
 struct Node {
     int id;
     bool isRoot;
-    Node(int id, bool isRoot): id(id), isRoot(isRoot){}
+
+    Node(int id, bool isRoot) : id(id), isRoot(isRoot) {}
 };
 
 class AdjacencyListGraph : public IGraph {
