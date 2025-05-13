@@ -3,18 +3,12 @@
 
 #include "IGraph.h"
 #include "GraphType.h"
+#include "Node.h"
 #include<unordered_map>
 #include<vector>
 #include<string>
 
 using namespace std;
-
-struct Node {
-    int id;
-    bool isRoot;
-
-    Node(int id, bool isRoot) : id(id), isRoot(isRoot) {}
-};
 
 class AdjacencyListGraph : public IGraph {
 

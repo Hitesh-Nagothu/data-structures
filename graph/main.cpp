@@ -1,11 +1,14 @@
 #include "AdjacencyListGraph.h"
+#include "AdjacencyMatrixGraph.h"
 #include "GraphType.h"
 #include <iostream>
 
 using namespace std;
 
 int main() {
-    AdjacencyListGraph graph(GraphType::DIRECTED);
+   // TODO Use dependency injection to choose between AdjacencyListGraph and AdjacencyMatrixGraph
+   // AdjacencyListGraph graph(GraphType::DIRECTED);
+   AdjacencyMatrixGraph graph(GraphType::DIRECTED);
 
     graph.addNode(1, true);
     graph.addNode(2, false);
