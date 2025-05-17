@@ -4,6 +4,7 @@
 #include<unordered_map>
 #include<unordered_set>
 #include<stack>
+#include<queue>
 
 using namespace std;
 
@@ -44,7 +45,7 @@ void AdjacencyListGraph::addEdge(int from, int to, int weight=1){
     connections[from].emplace_back(connection);
 }
 
-void AdjacencyListGraph::printGraph() const {
+void AdjacencyListGraph::printGraph() {
 
     for(const auto& [nodeId, neighbors] : connections) {
         cout << "Node " << nodeId << "->";
@@ -83,8 +84,46 @@ unordered_map<int, vector<int>> AdjacencyListGraph::depthFirstTraversal(){
                         to_visit.push(next_node);
                     }
                 }
+                visited.insert(current);
             }
 
+        }
+    }
+
+    return result;
+}
+
+unordered_map<int, vector<int>> AdjacencyListGraph::breadthFirstTraversal() {
+
+    unordered_map<int, vector<int>> result;
+    queue<int> q;
+
+    // push all the roots to the queue
+    for(const auto& [id, node]: nodes){
+        if(node.isRoot){
+
+            // maintain a set per root, and not global
+            unordered_set<int> localVisited;
+
+            q.push(id);
+            localVisited.insert(id);
+
+            result[id]= vector<int>();
+
+            while(!q.empty()){
+
+                int current_node = q.front();
+                q.pop();
+
+                result[id].push_back(current_node);
+        
+                for(const auto& [next_node, weight]:connections[current_node]){
+                    q.push(next_node);
+                    localVisited.insert(next_node);
+                }
+        
+            }
+    
         }
     }
 

@@ -45,7 +45,7 @@ void AdjacencyMatrixGraph::addEdge(int from, int to, int weight) {
     adjacencyMatrix[from][to] = weight;
 }
 
-void AdjacencyMatrixGraph::printGraph() const {
+void AdjacencyMatrixGraph::printGraph() {
     for(int i = 0; i < maxNodes; ++i) {
         cout << "Node " << i << "->";
         for(int j = 0; j < maxNodes; ++j) {
@@ -67,6 +67,7 @@ unordered_map<int, vector<int>> AdjacencyMatrixGraph::depthFirstTraversal() {
             stack<int> to_visit;
             to_visit.push(id);
             visited.insert(id);
+
             result[id] = vector<int>();
             result[id].push_back(id);
 
@@ -88,3 +89,33 @@ unordered_map<int, vector<int>> AdjacencyMatrixGraph::depthFirstTraversal() {
     return result;
 }
 
+unordered_map<int, vector<int>> AdjacencyMatrixGraph::breadthFirstTraversal(){
+
+    unordered_map<int, vector<int>> result;
+    queue<int> q;
+
+    for (const auto& [id, node] : nodes) {
+        if (node.isRoot) {
+            unordered_set<int> localVisited;
+            queue<int> q;
+            q.push(id);
+            localVisited.insert(id);
+            result[id] = vector<int>();
+    
+            while (!q.empty()) {
+                int current = q.front();
+                q.pop();
+                result[id].push_back(current);
+    
+                for (int j = 0; j < maxNodes; ++j) {
+                    if (adjacencyMatrix[current][j] != 0 && localVisited.count(j) == 0) {
+                        q.push(j);
+                        localVisited.insert(j);
+                    }
+                }
+            }
+        }
+    }
+    
+    return result;
+}

@@ -14,12 +14,30 @@ int main() {
     graph.addNode(2, false);
     graph.addNode(3, false);
     graph.addNode(4, false);
+    graph.addNode(5, true);
+    graph.addNode(6, false);
 
+    /*
+    Bread First Traversal
+    Input:
+            1    5
+           / \  /
+          2---3
+         /     \
+        4       6
+
+    Output: 
+        Root 1: 1 -> 2 -> 3 -> 4 -> 6
+        Root 5: 5 -> 3 -> 6
+    */
     graph.addEdge(1, 2, 1);
-    graph.addEdge(2, 3, 1);
+    graph.addEdge(1, 3, 1);
     graph.addEdge(2, 4, 1);
+    graph.addEdge(2, 3, 1);
+    graph.addEdge(5, 3, 1);
+    graph.addEdge(3, 6, 1);
 
-    auto traversal = graph.depthFirstTraversal();
+    auto traversal = graph.breadthFirstTraversal();
     for(const auto& [node, path] : traversal) {
         cout << "Root " << node << ": ";
         for (int i = 0; i < path.size(); ++i) {

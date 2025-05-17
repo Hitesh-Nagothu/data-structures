@@ -23,10 +23,10 @@ class AdjacencyListGraph : public IGraph {
 
         void addNode(int id, bool isRoot) override;
         void addEdge(int from, int to, int weight) override;
-        void printGraph() const override;
+        void printGraph() override;
 
         unordered_map<int, vector<int>> depthFirstTraversal() override;
-       // unordered_map<int, vector<int>> breadthFirstTravelsal() override;
+        unordered_map<int, vector<int>> breadthFirstTraversal() override;
 };
 
 
