@@ -1,4 +1,4 @@
-#include "AdjacencyMatrixGraph.h"
+#include "adjacency_matrix.h"
 
 void AdjacencyMatrixGraph::addNode(int id, bool isRoot) {
 

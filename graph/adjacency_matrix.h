@@ -2,8 +2,8 @@
 #define ADJACENCY_MATRIX_GRAPH_H
 
 #include "IGraph.h"
-#include "Node.h"
-#include "GraphType.h"
+#include "node.h"
+#include "graph_type.h"
 #include <unordered_map>
 #include <unordered_set>
 #include <stdexcept>

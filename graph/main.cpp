@@ -1,6 +1,6 @@
-#include "AdjacencyListGraph.h"
-#include "AdjacencyMatrixGraph.h"
-#include "GraphType.h"
+#include "adjacency_list.h"
+#include "adjacency_matrix.h"
+#include "graph_type.h"
 #include <iostream>
 
 using namespace std;
